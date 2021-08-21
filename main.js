@@ -1,4 +1,11 @@
 var video;
+
+noseX=0;
+noseY=0;
+
+noseX1=0;
+noseY1=0;
+
 function preload(){
     clown_nose=loadImage('clown.png');
     lipstick=loadImage('lipstick.png')
@@ -16,6 +23,7 @@ tint_color="";
 poseNet=ml5.poseNet(video, modelLoaded);
 
 }
+
 function gotPoses(results){
     if(results.length>0)
     {
@@ -23,14 +31,14 @@ function gotPoses(results){
     noseX=results[0].pose.nose.x-125;
     noseY=results[0].pose.nose.y-60;
     }
-    }
-    noseX=0;
-    noseY=0;
+}
+   
 
 function draw(){
 image(video, 0, 0, 400, 400);
 tint(tint_color);
 image(clown_nose,noseX, noseY, 30, 30)
+image(glasses,noseX1, noseY1, 30, 30)
 }
 
 function take_snapshot(){
@@ -53,14 +61,15 @@ function modelLoaded(){
 
 function glass(){
     poseNet.on('pose',gotPosesone)
-    image(glasses, noseX, noseY, 30, 30)
+    image(glasses, noseX1, noseY1, 30, 30)
+    
 }
 
 function gotPosesone(results){
     if(results.length>0)
     {
     console.log(results)
-    noseX=results[0].pose.nose.x-125;
-    noseY=results[0].pose.nose.y-60;
+    noseX1=results[0].pose.nose.x-125;
+    noseY1=results[0].pose.nose.y-140;
     }
     }
